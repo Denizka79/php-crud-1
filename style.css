@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+table {
+    border-collapse: collapse;
+    width: 600px;
+    margin-top: 10px;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+}
+
+/* tr:nth-child(even) {
+    background-color: #dddddd;
+} */
