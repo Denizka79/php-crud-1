@@ -1,23 +1,90 @@
 * {
     margin: 0;
+    box-sizing: border-box;
 }
 
 body {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #dddddd;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+nav {
+    background-color: pink;
+}
+
+main {
+    display: flex;
+    width: 100%;
+}
+
+.filter {
+    width: 25%;
+    padding: 10px;
+}
+
+.search-filter {
+    margin-top: 15px;
+}
+
+select {
+    width: 75%;
+    margin-top: 5px;
+}
+
+input {
+    width: 30%;
+    margin-top: 5px;
+}
+
+button {
+    margin-top: 10px;
+}
+
+p {
+    margin-top: 10px;
+}
+
+.items {
+    width: 75%;
+    display: flex;
 }
 
 table {
     border-collapse: collapse;
-    width: 600px;
-    margin-top: 10px;
+    margin: 10px;
+    width: 100%;
 }
 
 td, th {
-    border: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    border-left: none;
+    border-right: none;
+    border-top: none;
     text-align: center;
+}
+
+th {
+    background-color: #dddddd;
+}
+
+footer {
+    margin-top: auto;
+    border-top: 1px solid #dddddd;;
+    text-align: center;
+    padding: 20px;
 }
 
 /* tr:nth-child(even) {
