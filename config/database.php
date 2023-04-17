@@ -13,4 +13,8 @@ if ($conn->connect_error) {
 
 //echo "Connected!";
 
+$conn -> set_charset("utf8");
+
+//echo "Current character set is: " . $conn -> character_set_name();
+
 ?>

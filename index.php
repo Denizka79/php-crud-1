@@ -2,22 +2,29 @@
 
 include "config/database.php";
 
-$sql_prod = "SELECT * FROM crud";
+$sql_prod = "SELECT * FROM products";
 $result_prod = mysqli_query($conn, $sql_prod);
 $products = mysqli_fetch_all($result_prod, MYSQLI_ASSOC);
 
-$sql_vend = "SELECT vendor FROM crud GROUP BY vendor";
+$sql_vend = "SELECT vendor FROM products GROUP BY vendor";
 $result_vend = mysqli_query($conn, $sql_vend);
 $vendors = mysqli_fetch_all($result_vend, MYSQLI_ASSOC);
 
+$sql_type = "SELECT type FROM products GROUP BY type";
+$result_type = mysqli_query($conn, $sql_type);
+$types = mysqli_fetch_all($result_type, MYSQLI_ASSOC);
+
 //var_dump($vendors);
+
+//phpinfo();
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<!-- <html lang="en"> -->
 <head>
-    <meta charset="UTF-8">
+    <!-- <meta charset="UTF-8"> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD 1</title>
@@ -42,10 +49,9 @@ $vendors = mysqli_fetch_all($result_vend, MYSQLI_ASSOC);
                 </select>
                 <p>По типу:</p>
                 <select name="prodtype" id="">
-                    <option value="volvo">Volvo</option>
-                    <option value="Saab">Saab</option>
-                    <option value="Mercedes">Mercedes</option>
-                    <option value="Audi">Audi</option>
+                    <?php foreach($types as $type) : ?>
+                    <option value="<?php echo $type["type"]; ?>"><?php echo $type["type"]; ?></option>
+                    <?php endforeach; ?>
                 </select>
                 <p>По цене:</p>
                 <label for="pricefrom">
