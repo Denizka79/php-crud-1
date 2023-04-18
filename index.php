@@ -2,9 +2,7 @@
 
 include "config/database.php";
 
-$sql_prod = "SELECT * FROM products";
-$result_prod = mysqli_query($conn, $sql_prod);
-$products = mysqli_fetch_all($result_prod, MYSQLI_ASSOC);
+$products = [];
 
 $sql_vend = "SELECT vendor FROM products GROUP BY vendor";
 $result_vend = mysqli_query($conn, $sql_vend);
@@ -14,9 +12,36 @@ $sql_type = "SELECT type FROM products GROUP BY type";
 $result_type = mysqli_query($conn, $sql_type);
 $types = mysqli_fetch_all($result_type, MYSQLI_ASSOC);
 
-//var_dump($vendors);
+$sql_prod = "SELECT * FROM products";
 
-//phpinfo();
+if (isset($_POST["prodtype"])) {
+    $filter_prodtype = $_POST["prodtype"];
+    $sql_prodtype = " AND type = " . $filter_prodtype;
+    $sql_prod = $sql_prod . $sql_prodtype;
+}
+
+if (isset($_POST["prodvendor"])) {
+    $filter_vendor = $_POST["prodvendor"];
+    $sql_prodvendor = " AND vendor = " . $filter_vendor;
+    $sql_prod = $sql_prod . $sql_prodvendor;
+}
+
+if (isset($_POST["pricefrom"])) {
+    $filter_pricefrom = $_POST["pricefrom"];
+    $sql_pricefrom = " AND price >= " . $filter_pricefrom;
+    $sql_prod = $sql_prod . $sql_pricefrom;
+}
+
+if (isset($_POST["pricetill"])) {
+    $filter_pricetill = $_POST["pricetill"];
+    $sql_pricetill = " AND price <= " . $filter_pricefrom;
+    $sql_prod = $sql_prod . $sql_pricetill;
+}
+
+echo $sql_prod;
+
+/* $result_prod = mysqli_query($conn, $sql_prod);
+$products = mysqli_fetch_all($result_prod, MYSQLI_ASSOC);*/
 
 ?>
 
@@ -40,15 +65,17 @@ $types = mysqli_fetch_all($result_type, MYSQLI_ASSOC);
     <main>
         <div class="filter">
             <h3>Отфильтровать</h3>
-            <form class="search-filter" action="submit.php" method="post">
+            <form class="search-filter" action="index.php" method="post">
                 <p>По производителю:</p>
                 <select name="prodvendor" id="">
+                    <option value=""></option>
                     <?php foreach($vendors as $vendor) : ?>
                     <option value="<?php echo $vendor["vendor"]; ?>"><?php echo $vendor["vendor"]; ?></option>
                     <?php endforeach; ?>
                 </select>
                 <p>По типу:</p>
                 <select name="prodtype" id="">
+                    <option value=""></option>
                     <?php foreach($types as $type) : ?>
                     <option value="<?php echo $type["type"]; ?>"><?php echo $type["type"]; ?></option>
                     <?php endforeach; ?>
@@ -78,25 +105,12 @@ $types = mysqli_fetch_all($result_type, MYSQLI_ASSOC);
                     <td><?php echo $prod["price"] ?></td>
                 </tr>
                 <?php endforeach; ?>
-                <!-- <tr>
-                    <td>Товар 1</td>
-                    <td>Хороший товар</td>
-                    <td>10000</td>
-                </tr>
-                <tr>
-                    <td>Товар 2</td>
-                    <td>Хороший товар</td>
-                    <td>10000</td>
-                </tr>
-                <tr>
-                    <td>Товар 3</td>
-                    <td>Хороший товар</td>
-                    <td>10000</td>
-                </tr> -->
+                <?php if (empty($products)) :  ?>
+                    <tr>
+                        <td colspan="3">Нет товаров для отображения</td>
+                    </tr>
+                <?php endif; ?>
             </table>
-        <?php if (empty($products)) :  ?>
-            <p>В каталоге отсутствуют товары</p>
-        <?php endif; ?>
     </main>
     <footer>&#169; Denis Meshcheryakov</footer>
 </body>
