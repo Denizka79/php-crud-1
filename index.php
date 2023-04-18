@@ -13,35 +13,51 @@ $result_type = mysqli_query($conn, $sql_type);
 $types = mysqli_fetch_all($result_type, MYSQLI_ASSOC);
 
 $sql_prod = "SELECT * FROM products";
+$sql_and = '';
+$sql_where = '';
+$fields = [];
 
-if (isset($_POST["prodtype"])) {
+if (!empty($_POST["prodtype"])) {
     $filter_prodtype = $_POST["prodtype"];
-    $sql_prodtype = " AND type = " . $filter_prodtype;
-    $sql_prod = $sql_prod . $sql_prodtype;
+    $sql_prodtype = " type = " . $filter_prodtype;
+    array_push($fields, $filter_prodtype);
+    //$sql_prod = $sql_prod . $sql_prodtype;
 }
 
-if (isset($_POST["prodvendor"])) {
+if (!empty($_POST["prodvendor"])) {
     $filter_vendor = $_POST["prodvendor"];
-    $sql_prodvendor = " AND vendor = " . $filter_vendor;
-    $sql_prod = $sql_prod . $sql_prodvendor;
+    $sql_prodvendor = " vendor = " . $filter_vendor;
+    array_push($fields, $filter_vendor);
+    //$sql_prod = $sql_prod . $sql_prodvendor;
 }
 
-if (isset($_POST["pricefrom"])) {
+if (!empty($_POST["pricefrom"])) {
     $filter_pricefrom = $_POST["pricefrom"];
-    $sql_pricefrom = " AND price >= " . $filter_pricefrom;
-    $sql_prod = $sql_prod . $sql_pricefrom;
+    array_push($fields, $filter_pricefrom);
+    //$sql_prod = $sql_prod . $sql_pricefrom;
 }
 
-if (isset($_POST["pricetill"])) {
+if (!empty($_POST["pricetill"])) {
     $filter_pricetill = $_POST["pricetill"];
-    $sql_pricetill = " AND price <= " . $filter_pricefrom;
-    $sql_prod = $sql_prod . $sql_pricetill;
+    array_push($fields, $filter_pricetill);
+    //$sql_prod = $sql_prod . $sql_pricetill;
 }
 
-echo $sql_prod;
+if (count($fields) > 0) {
+    $sql_where = " WHERE ";
+    if (!empty($filter_pricetill)) {
+        $sql_pricetill = " price <= " . $filter_pricefrom;
+    } elseif (!empty($filter_pricefrom)) {
+        $sql_pricefrom = " price >= " . $filter_pricefrom;
+    }
+}
+
+//echo $sql_prod;
+//var_dump($fields);
+//echo count($fields);
 
 /* $result_prod = mysqli_query($conn, $sql_prod);
-$products = mysqli_fetch_all($result_prod, MYSQLI_ASSOC);*/
+$products = mysqli_fetch_all($result_prod, MYSQLI_ASSOC); */
 
 ?>
 
@@ -83,11 +99,11 @@ $products = mysqli_fetch_all($result_prod, MYSQLI_ASSOC);*/
                 <p>По цене:</p>
                 <label for="pricefrom">
                     От:
-                    <input type="number">
+                    <input type="number" name="pricefrom">
                 </label>
                 <label for="pricetill">
                     До:
-                    <input type="number">
+                    <input type="number" name="pricetill">
                 </label>
                 <br>
                 <button type="submit">Искать</button>
