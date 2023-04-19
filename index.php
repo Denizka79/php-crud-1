@@ -13,51 +13,53 @@ $result_type = mysqli_query($conn, $sql_type);
 $types = mysqli_fetch_all($result_type, MYSQLI_ASSOC);
 
 $sql_prod = "SELECT * FROM products";
-$sql_and = '';
-$sql_where = '';
 $fields = [];
+$sql_second = '';
 
-if (!empty($_POST["prodtype"])) {
-    $filter_prodtype = $_POST["prodtype"];
-    $sql_prodtype = " type = " . $filter_prodtype;
-    array_push($fields, $filter_prodtype);
-    //$sql_prod = $sql_prod . $sql_prodtype;
+if ($_POST["prodtype"] != '') {
+    $prodtype_value = [" type = ", "'" . $_POST["prodtype"] .  "'"];
+    array_push($fields, $prodtype_value);
 }
 
-if (!empty($_POST["prodvendor"])) {
-    $filter_vendor = $_POST["prodvendor"];
-    $sql_prodvendor = " vendor = " . $filter_vendor;
-    array_push($fields, $filter_vendor);
-    //$sql_prod = $sql_prod . $sql_prodvendor;
+if ($_POST["prodvendor"] != '') {
+    $prodvendor_value = $_POST["prodvendor"];
+    array_push($fields, [" vendor = ", "'" . $prodvendor_value . "'"]);
 }
 
-if (!empty($_POST["pricefrom"])) {
-    $filter_pricefrom = $_POST["pricefrom"];
-    array_push($fields, $filter_pricefrom);
-    //$sql_prod = $sql_prod . $sql_pricefrom;
+if ($_POST["pricefrom"] != '') {
+    $pricefrom_value = $_POST["pricefrom"];
+    array_push($fields, [" price >= ", $pricefrom_value]);
 }
 
-if (!empty($_POST["pricetill"])) {
-    $filter_pricetill = $_POST["pricetill"];
-    array_push($fields, $filter_pricetill);
-    //$sql_prod = $sql_prod . $sql_pricetill;
+if ($_POST["pricetill"] != '') {
+    $pricetill_value = $_POST["pricetill"];
+    array_push($fields, [" price <= ", $pricetill_value]);
 }
 
 if (count($fields) > 0) {
-    $sql_where = " WHERE ";
-    if (!empty($filter_pricetill)) {
-        $sql_pricetill = " price <= " . $filter_pricefrom;
-    } elseif (!empty($filter_pricefrom)) {
-        $sql_pricefrom = " price >= " . $filter_pricefrom;
+    $sql_prod = $sql_prod . " WHERE ";
+    if (count($fields) == 1) {
+        $sql_prod = $sql_prod . $fields[0][0] . $fields[0][1];
+    } elseif (count($fields) > 1) {
+        for ($i = 0; $i < count($fields); $i++) {
+            if ($i < (count($fields) - 1)) {
+                $sql_and = " AND ";
+            } else {
+                $sql_and = "";
+            }
+            $sql_second = $sql_second . $fields[$i][0] . $fields[$i][1] . $sql_and;
+        }
+        $sql_prod = $sql_prod . $sql_second;
     }
 }
 
+//echo $sql_second;
 //echo $sql_prod;
 //var_dump($fields);
 //echo count($fields);
 
-/* $result_prod = mysqli_query($conn, $sql_prod);
-$products = mysqli_fetch_all($result_prod, MYSQLI_ASSOC); */
+$result_prod = mysqli_query($conn, $sql_prod);
+$products = mysqli_fetch_all($result_prod, MYSQLI_ASSOC);
 
 ?>
 
