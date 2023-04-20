@@ -49,6 +49,11 @@ input {
     margin-top: 5px;
 }
 
+.prodname {
+    text-align: left;
+    padding-left: 20px;
+}
+
 button {
     margin-top: 10px;
 }
@@ -60,12 +65,14 @@ p {
 .items {
     width: 75%;
     display: flex;
+    flex-direction: column;
+    padding: 10px;
 }
 
 table {
     border-collapse: collapse;
-    margin: 10px;
     width: 100%;
+    margin-top: 10px;
 }
 
 td, th {
