@@ -69,6 +69,21 @@ p {
     padding: 10px;
 }
 
+.items-header {
+    display: flex;
+    justify-content: right;
+}
+
+.add-new-item {
+    display: inline-block;
+    padding: 5px;
+    background-color: #d3d3d3;
+    text-decoration: none;
+    color: #000;
+    border: 1px solid #999;
+    border-radius: 4px; 
+}
+
 table {
     border-collapse: collapse;
     width: 100%;

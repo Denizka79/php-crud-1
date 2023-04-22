@@ -56,7 +56,7 @@ if (isset($_POST["submit"])) {
                 }
                 $sql_second = $sql_second . $fields[$i][0] . $fields[$i][1] . $sql_and;
             }
-            $sql_prod = $sql_prod . $sql_second . $sql_order;
+            $sql_prod = $sql_prod . $sql_second;
         }
     }
     $sql_prod = $sql_prod . $sql_order;
@@ -69,6 +69,8 @@ if (isset($_POST["clear"])) {
     unset($_POST["pricetill"]);
     unset($_POST["sort"]);
 }
+
+//echo $sql_prod;
 
 $result_prod = mysqli_query($conn, $sql_prod);
 $products = mysqli_fetch_all($result_prod, MYSQLI_ASSOC);
@@ -134,6 +136,9 @@ $products = mysqli_fetch_all($result_prod, MYSQLI_ASSOC);
             </form>
         </div>
         <div class="items">
+            <div class="items-header">
+                <a class="add-new-item" href="new.php">Создать новый</a>
+            </div>
             <table>
                 <th>ТОВАР</th>
                 <th>ОПИСАНИЕ</th>
