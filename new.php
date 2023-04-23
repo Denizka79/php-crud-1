@@ -56,3 +56,37 @@ if (isset($_POST["submit"])) {
 }
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create new item</title>
+</head>
+<body>
+    <form class="new-item" action="index.php" method="POST">
+        <label for="newitemname">
+            Название:
+            <input type="text" name="newitemname">
+        </label>
+        <label for="newitemdesc">
+            Описание:
+            <input type="text" name="newitemdesc">
+        </label>
+        <label for="newitemprice">
+            Цена:
+            <input type="number" name="newitemprice">
+        </label>
+        <label for="newitemtype">
+            Тип:
+            <input type="text" name="newitemdesc">
+        </label>
+        <label for="newitemvendor">
+            Описание:
+            <input type="text" name="newitemdesc">
+        </label>
+    </form>
+</body>
+</html>
