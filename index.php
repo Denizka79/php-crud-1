@@ -91,7 +91,8 @@ $products = mysqli_fetch_all($result_prod, MYSQLI_ASSOC);
     <header>
         <div class="logo">ТОВАРНЫЕ ПОЗИЦИИ</div>
         <div class="nav">
-            <button type="submit">Войти</button>
+            <a class="login-button" href="#">Выйти</a>
+            <!-- <button type="submit">Войти</button> -->
         </div>
     </header>
     <main>
@@ -115,11 +116,11 @@ $products = mysqli_fetch_all($result_prod, MYSQLI_ASSOC);
                 <p>По цене:</p>
                 <label for="pricefrom">
                     От:
-                    <input type="number" name="pricefrom">
+                    <input class="filter-input" type="number" name="pricefrom">
                 </label>
                 <label for="pricetill">
                     До:
-                    <input type="number" name="pricetill">
+                    <input class="filter-input" type="number" name="pricetill">
                 </label>
                 <br>
                 <p>Сортировать:</p>
@@ -143,11 +144,13 @@ $products = mysqli_fetch_all($result_prod, MYSQLI_ASSOC);
                 <th>ТОВАР</th>
                 <th>ОПИСАНИЕ</th>
                 <th>ЦЕНА</th>
+                <th>ДЕЙСТВИЕ</th>
                 <?php foreach($products as $prod) : ?>
                 <tr>
                     <td class="prodname"><?php echo $prod["title"] ?></td>
                     <td><?php echo $prod["description"] ?></td>
                     <td><?php echo $prod["price"] ?></td>
+                    <td><a class="action edit" href="update.php?id=<?php echo $prod["id"]?>">Редактировать</a><a class="action delete" href="#">Удалить</a></td>
                 </tr>
                 <?php endforeach; ?>
                 <?php if (empty($products)) :  ?>

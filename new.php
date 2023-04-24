@@ -13,45 +13,47 @@ $itempriceErr = '';
 $itemvendorErr = '';
 $itemtypeErr = '';
 
-if (isset($_POST["submit"])) {
-    if (empty($_POST["itemname"])) {
+if (isset($_POST["newitemsubmit"])) {
+    if (empty($_POST["newitemname"])) {
         $itemnameErr = "Item name is required";
     } else {
-        $itemname = filter_input(INPUT_POST, "itemname", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $itemname = filter_input(INPUT_POST, "newitemname", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     }
 
-    if (empty($_POST["itemdesc"])) {
+    if (empty($_POST["newitemdesc"])) {
         $itemdescErr = "Item description is required";
     } else {
-        $itemdesc = filter_input(INPUT_POST, "itemdesc", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $itemdesc = filter_input(INPUT_POST, "newitemdesc", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     }
 
-    if (empty($_POST["itemprice"])) {
+    if (empty($_POST["newitemprice"])) {
         $itempriceErr = "Item price is required";
     } else {
-        $itemprice = filter_input(INPUT_POST, "itemprice", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $itemprice = filter_input(INPUT_POST, "newitemprice", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     }
 
-    if (empty($_POST["itemvendor"])) {
+    if (empty($_POST["newitemvendor"])) {
         $itemvendorErr = "Item vendor is required";
     } else {
-        $itemvendor = filter_input(INPUT_POST, "itemvendor", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $itemvendor = filter_input(INPUT_POST, "newitemvendor", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     }
 
-    if (empty($_POST["itemtype"])) {
+    if (empty($_POST["newitemtype"])) {
         $itemtypeErr = "Item type is required";
     } else {
-        $itemtype = filter_input(INPUT_POST, "itemtype", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $itemtype = filter_input(INPUT_POST, "newitemtype", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     }
 
     if (empty($itemnameErr) && empty($itemdescErr) && empty($itempriceErr) && empty($itemvendorErr) && empty($itemtypeErr)) {
-        $sql = "INSERT INTO products (title, description, price, vendor, type) VALUES ('$itemname', '$itemdesc', '$itemvendor', '$itemtype')";
+        $sql = "INSERT INTO products (title, description, price, vendor, type) VALUES ('$itemname', '$itemdesc', '$itemprice', '$itemvendor', '$itemtype')";
 
         if (mysqli_query($conn, $sql)) {
             header('Location: index.php');
         } else {
             echo "Error" . mysqli_error($conn);
         }
+    } else {
+        echo $itemnameErr . " " . $itemdescErr . " " . $itempriceErr . " " . $itemvendorErr . " " . $itemtypeErr;
     }
 }
 
@@ -64,29 +66,45 @@ if (isset($_POST["submit"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create new item</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form class="new-item" action="index.php" method="POST">
-        <label for="newitemname">
-            Название:
-            <input type="text" name="newitemname">
-        </label>
-        <label for="newitemdesc">
-            Описание:
-            <input type="text" name="newitemdesc">
-        </label>
-        <label for="newitemprice">
-            Цена:
-            <input type="number" name="newitemprice">
-        </label>
-        <label for="newitemtype">
-            Тип:
-            <input type="text" name="newitemdesc">
-        </label>
-        <label for="newitemvendor">
-            Описание:
-            <input type="text" name="newitemdesc">
-        </label>
-    </form>
+    <header>
+        <div class="logo">ТОВАРНЫЕ ПОЗИЦИИ</div>
+        <div class="nav">
+            <a class="login-button" href="#">Выйти</a>
+            <!-- <button type="submit">Войти</button> -->
+        </div>
+    </header>
+    <main class="main-new-item">
+        <form class="new-item" action="new.php" method="POST">
+            <h2>Новая товарная позиция</h2>
+            <div class="new-item-name">
+                <p>Название:</p>
+                <input class="new-item-input" type="text" name="newitemname">
+            </div>
+            <div class="new-item-description">
+                <p>Описание:</p>
+                <input class="new-item-input" type="text" name="newitemdesc">
+            </div>
+            <div class="new-item-price">
+                <p> Цена:</p>
+                <input class="new-item-input" type="number" name="newitemprice">
+            </div>
+            <div class="new-item-type">
+                <p>Тип:</p>
+                <input class="new-item-input" type="text" name="newitemtype">
+            </div>
+            <div class="new-item-vendor">
+                <p>Производитель:</p>
+                <input class="new-item-input" type="text" name="newitemvendor">
+            </div>
+            <div class="new-item-submit">
+                <input type="submit" name="newitemsubmit" value="Создать">
+            </div>
+        </form>
+        <a class="to-main-page" href="index.php">На главную</a>
+    </main>
+    <footer>&#169; Denis Meshcheryakov</footer>
 </body>
 </html>

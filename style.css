@@ -1,12 +1,98 @@
+@font-face {
+    font-family: 'Open Sans', sans-serif;
+    src: url(fonts/OpenSans/OpenSans-Bold.ttf);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  @font-face {
+    font-family: 'Open Sans', sans-serif;
+    src: url(fonts/OpenSans/OpenSans-BoldItalic.ttf);
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  @font-face {
+    font-family: 'Open Sans', sans-serif;
+    src: url(fonts/OpenSans/OpenSans-ExtraBold.ttf);
+    font-style: normal;
+    font-weight: 800;
+  }
+
+  @font-face {
+    font-family: 'Open Sans', sans-serif;
+    src: url(fonts/OpenSans/OpenSans-ExtraBoldItalic.ttf);
+    font-style: italic;
+    font-weight: 800;
+  }
+
+  @font-face {
+    font-family: 'Open Sans', sans-serif;
+    src: url(fonts/OpenSans/OpenSans-Italic.ttf);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: 'Open Sans', sans-serif;
+    src: url(fonts/OpenSans/OpenSans-Light.ttf);
+    font-style: normal;
+    font-weight: 300;
+  }
+
+  @font-face {
+    font-family: 'Open Sans', sans-serif;
+    src: url(fonts/OpenSans/OpenSans-LightItalic.ttf);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  @font-face {
+    font-family: 'Open Sans', sans-serif;
+    src: url(fonts/OpenSans/OpenSans-Medium.ttf);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  @font-face {
+    font-family: 'Open Sans', sans-serif;
+    src: url(fonts/OpenSans/OpenSans-MediumItalic.ttf);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  @font-face {
+    font-family: 'Open Sans', sans-serif;
+    src: url(fonts/OpenSans/OpenSans-Regular.ttf);
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: 'Open Sans', sans-serif;
+    src: url(fonts/OpenSans/OpenSans-SemiBold.ttf);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  @font-face {
+    font-family: 'Open Sans', sans-serif;
+    src: url(fonts/OpenSans/OpenSans-SemiBoldItalic.ttf);
+    font-style: normal;
+    font-weight: 600;
+  }
+
 * {
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
 }
 
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    min-width: 800px;
 }
 
 header {
@@ -30,6 +116,20 @@ main {
     width: 100%;
 }
 
+.main-new-item, .main-upd-item {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.new-item, .upd-item {
+    width: 500px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    padding: 5px;
+}
+
 .filter {
     width: 25%;
     padding: 10px;
@@ -44,14 +144,34 @@ select {
     margin-top: 5px;
 }
 
-input {
+.filter-input {
     width: 30%;
     margin-top: 5px;
+}
+
+.new-item-input, .upd-item-input {
+    width: 100%;
+}
+
+.new-item-submit, .upd-item-submit {
+    margin-top: 7px;
+    text-align: center;
 }
 
 .prodname {
     text-align: left;
     padding-left: 20px;
+}
+
+.to-main-page {
+    display: inline-block;
+    margin-top: 30px;
+    text-decoration: none;
+    color: #000;
+}
+
+.to-main-page:hover {
+    text-decoration: underline;
 }
 
 button {
@@ -74,7 +194,12 @@ p {
     justify-content: right;
 }
 
-.add-new-item {
+a {
+    font-weight: 300;
+    font-style: normal;
+}
+
+.add-new-item, .login-button {
     display: inline-block;
     padding: 5px;
     background-color: #d3d3d3;
@@ -96,6 +221,29 @@ td, th {
     border-right: none;
     border-top: none;
     text-align: center;
+}
+
+.action {
+    display: inline-block;
+    text-decoration: none;
+    padding: 3px;
+    border: 1px solid #999;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #fff;
+    margin: 2px;
+}
+
+.action:hover {
+    text-decoration: underline;
+}
+
+.edit {
+    background-color: green;
+}
+
+.delete {
+    background-color: red;
 }
 
 th {
