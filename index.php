@@ -150,7 +150,7 @@ $products = mysqli_fetch_all($result_prod, MYSQLI_ASSOC);
                     <td class="prodname"><?php echo $prod["title"] ?></td>
                     <td><?php echo $prod["description"] ?></td>
                     <td><?php echo $prod["price"] ?></td>
-                    <td><a class="action edit" href="update.php?id=<?php echo $prod["id"]?>">Редактировать</a><a class="action delete" href="#">Удалить</a></td>
+                    <td><a class="action edit" href="update.php?id=<?php echo $prod["id"]; ?>">Редактировать</a><a class="action delete" href="delete.php?id=<?php echo $prod["id"]; ?>">Удалить</a></td>
                 </tr>
                 <?php endforeach; ?>
                 <?php if (empty($products)) :  ?>
