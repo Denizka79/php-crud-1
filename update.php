@@ -1,6 +1,6 @@
 <?php
 
-include "config/database.php";
+include "include/header.php";
 
 $update_id = '';
 $products = [];
@@ -89,22 +89,6 @@ if (isset($_POST["upditemsubmit"])) {
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update item</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <div class="logo">ТОВАРНЫЕ ПОЗИЦИИ</div>
-        <div class="nav">
-            <a class="login-button" href="#">Выйти</a>
-        </div>
-    </header>
     <main class="main-upd-item">
         <form class="upd-item" action="update.php" method="POST">
             <input type="hidden" value="<?php echo $update_id; ?>" name="updid">
@@ -135,6 +119,5 @@ if (isset($_POST["upditemsubmit"])) {
         </form>
         <a class="to-main-page" href="index.php">На главную</a>
     </main>
-    <footer>&#169; Denis Meshcheryakov</footer>
-</body>
-</html>
+    
+    <?php include "include/footer.php"; ?>

@@ -116,15 +116,15 @@ main {
     width: 100%;
 }
 
-.main-new-item, .main-upd-item {
+.main-new-item, .main-upd-item, .main-signin {
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: auto;
 }
 
-.new-item, .upd-item {
-    width: 500px;
+.new-item, .upd-item, .signin {
+    width: 400px;
     border: 1px solid #999;
     border-radius: 5px;
     padding: 5px;
@@ -149,11 +149,11 @@ select {
     margin-top: 5px;
 }
 
-.new-item-input, .upd-item-input {
+.new-item-input, .upd-item-input, .login, .password {
     width: 100%;
 }
 
-.new-item-submit, .upd-item-submit {
+.new-item-submit, .upd-item-submit, .login-send {
     margin-top: 7px;
     text-align: center;
 }

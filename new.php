@@ -1,6 +1,6 @@
 <?php
 
-include "config/database.php";
+include "include/header.php";
 
 $itemname = '';
 $itemdesc = '';
@@ -59,23 +59,6 @@ if (isset($_POST["newitemsubmit"])) {
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create new item</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <div class="logo">ТОВАРНЫЕ ПОЗИЦИИ</div>
-        <div class="nav">
-            <a class="login-button" href="#">Выйти</a>
-            <!-- <button type="submit">Войти</button> -->
-        </div>
-    </header>
     <main class="main-new-item">
         <form class="new-item" action="new.php" method="POST">
             <h2>Новая товарная позиция</h2>
@@ -105,6 +88,5 @@ if (isset($_POST["newitemsubmit"])) {
         </form>
         <a class="to-main-page" href="index.php">На главную</a>
     </main>
-    <footer>&#169; Denis Meshcheryakov</footer>
-</body>
-</html>
+    
+<?php include "include/footer.php"; ?>
