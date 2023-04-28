@@ -2,6 +2,10 @@
 
 session_start();
 
+if(!$_SESSION["user"]) {
+    header('Location: signin.php');
+}
+
 include "config/database.php";
 
 ?>
