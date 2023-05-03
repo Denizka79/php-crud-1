@@ -24,7 +24,7 @@ include "config/database.php";
     <header>
         <div class="logo">ТОВАРНЫЕ ПОЗИЦИИ</div>
         <div class="nav">
-            <a class="login-button" href="#">Выйти</a>
+            <a class="login-button" href="logout.php">Выйти</a>
             <!-- <button type="submit">Войти</button> -->
         </div>
     </header>

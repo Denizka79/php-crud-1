@@ -11,6 +11,7 @@ include "config/database.php";
 $errors = [];
 $login = '';
 $pass = '';
+$success = '';
 
 if (isset($_POST["submit"])) {
     if ($_POST["login"] != '') {
@@ -40,9 +41,11 @@ if (isset($_POST["submit"])) {
         ];
         header('Location: index.php');
     } else {
-        $authErr = "Неверный логин или пароль";
-        array_push($errors, $authErr);
-        $_SESSION["errors"] = $errors;
+        if (!$errors) {
+            $authErr = "Неверный логин или пароль";
+            array_push($errors, $authErr);
+            $_SESSION["errors"] = $errors;
+        }
     }
 }
 
@@ -62,8 +65,8 @@ if (isset($_POST["submit"])) {
     <header>
         <div class="logo">ТОВАРНЫЕ ПОЗИЦИИ</div>
         <div class="nav">
-            <a class="login-button" href="#">Выйти</a>
-            <!-- <button type="submit">Войти</button> -->
+            <!-- <a class="login-button" href="#">Выйти</a>
+            <button type="submit">Войти</button> -->
         </div>
     </header>
     <main class="main-signin">
@@ -84,7 +87,7 @@ if (isset($_POST["submit"])) {
         
         if (isset($_SESSION["errors"])) {
             foreach($_SESSION["errors"] as $err) {
-                echo "<p>" . $err . "</p>";
+                echo '<p class="error">' . $err . '</p>';
             }
             unset($_SESSION["errors"]);
         }
